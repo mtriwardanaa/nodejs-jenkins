@@ -43,5 +43,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server Started at ${port} stage test`)
+  console.log(`Server Started at ${port}`)
 })
