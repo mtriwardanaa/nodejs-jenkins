@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - ampas_network
+    ports:
+      - 9000:9000
+    depends_on:
+      - mongo
+      - mysql
+      - redis
+      - adminer
+    environment:
+      - APP_NAME=ampas_network
+      - DATABASE_URL=mongodb://mongo_app:27017/?retryWrites=true&loadBalanced=false&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis_app
+  mongo:
+    container_name: mongo_app
+    image: mongo:7.0.5
+    ports:
+      - 27020:27017
+    networks:
+      - ampas_network
+    volumes:
+      - /home/mtriwardanaa/data/mongo:/data/db
+  mysql:
+    container_name: mysql_app
+    image: mysql:8.3.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: bangkal
+  adminer:
+    container_name: adminer_app
+    image: adminer
+    restart: always
+    ports:
+      - 8888:8080
+    networks:
+      - ampas_network
+  redis:
+    container_name: redis_app
+    image: redis:7.2.4
+    ports:
+      - 63799:6379
+    networks:
+      - ampas_network
+
+networks:
+  ampas_network:
+    name: ampas_network
+    external: true
