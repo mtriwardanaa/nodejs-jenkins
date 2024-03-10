@@ -19,8 +19,10 @@ pipeline {
             }
             
             steps {
-                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                    sh "${SCANNER_HOME}/bin/sonar-scanner"
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh "${SCANNER_HOME}/bin/sonar-scanner"
+                    }
                 }
             }
         }
