@@ -15,11 +15,11 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             environment {
-                SCANNER_HOME = tool 'SonarQubeScanner';    
+                SCANNER_HOME = tool 'sonarqube-scanner-latest';    
             }
             
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
