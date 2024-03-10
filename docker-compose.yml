@@ -7,16 +7,16 @@ services:
       context: .
       dockerfile: Dockerfile
     networks:
-      - ampas_network
+      - hello_network
     ports:
-      - 9000:9000
+      - 9009:9009
     depends_on:
       - mongo
       - mysql
       - redis
       - adminer
     environment:
-      - APP_NAME=ampas_network
+      - APP_NAME=app_hello_world
       - DATABASE_URL=mongodb://mongo_app:27017/?retryWrites=true&loadBalanced=false&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000
       - REDIS_PORT=6379
       - REDIS_HOST=redis_app
@@ -26,7 +26,7 @@ services:
     ports:
       - 27020:27017
     networks:
-      - ampas_network
+      - hello_network
     volumes:
       - /home/mtriwardanaa/data/mongo:/data/db
   mysql:
@@ -43,16 +43,14 @@ services:
     ports:
       - 8888:8080
     networks:
-      - ampas_network
+      - hello_network
   redis:
     container_name: redis_app
     image: redis:7.2.4
     ports:
       - 63799:6379
     networks:
-      - ampas_network
+      - hello_network
 
 networks:
-  ampas_network:
-    name: ampas_network
-    external: true
+  hello_network:

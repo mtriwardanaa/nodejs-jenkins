@@ -10,4 +10,4 @@ RUN npm install
 
 CMD ["node", "index.js"]
 
-EXPOSE 9000
+EXPOSE 9009

@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const redis = require("redis");
-const port = 9000;
+const port = 9009;
 
 const mongoString = process.env.DATABASE_URL;
 const redisPort = process.env.REDIS_PORT;
