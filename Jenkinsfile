@@ -3,16 +3,15 @@ pipeline {
         label "jenkin-agent"
     }
     stages {
-        stage("checkout") {
+        stage("Cleanup Workspace") {
             steps {
-                checkout scm
+                cleanWs()
             }
         }
     }
-
-    stage("run") {
+    stage("Checkout from SCM") {
         steps {
-            sh 'docker-compose up -d'
+            git branch: 'develop', credentialsId: 'github', url: 'https://github.com/mtriwardanaa/nodejs-jenkins'
         }
     }
 }
