@@ -8,10 +8,10 @@ pipeline {
                 cleanWs()
             }
         }
-    }
-    stage("Checkout from SCM") {
-        steps {
-            git branch: 'develop', credentialsId: 'github', url: 'https://github.com/mtriwardanaa/nodejs-jenkins'
+        stage("Checkout from SCM") {
+            steps {
+                git branch: 'develop', credentialsId: 'github', url: 'https://github.com/mtriwardanaa/nodejs-jenkins'
+            }
         }
     }
 }
